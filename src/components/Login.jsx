@@ -73,10 +73,8 @@ export const Login = () => {
 
   const navigate = useNavigate();
   useEffect(() => {
-    console.dir("effect");
-    console.dir(localStorage.getItem("token"));
-    if (localStorage.getItem("token")) {
-      console.dir(localStorage.getItem("token"));
+    const token = localStorage.getItem("token");
+    if (token) {
       navigate("/list");
     }
   });
