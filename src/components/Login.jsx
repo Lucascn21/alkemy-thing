@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 import { toast } from "react-toastify";
 const emailIsValid = (email) => {
+  // eslint-disable-next-line
   return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
 };
 
