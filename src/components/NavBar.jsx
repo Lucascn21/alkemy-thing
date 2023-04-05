@@ -6,9 +6,15 @@ export const NavBar = () => {
     <header>
       <nav>
         <ul>
-          <Link to="/">Home</Link>
-          <Link to="/list">List</Link>
-          <Link to="/contact">Contact</Link>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/list">List</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact</Link>
+          </li>
         </ul>
       </nav>
     </header>

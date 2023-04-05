@@ -8,7 +8,11 @@ export const Footer = () => {
               IG
             </a>
           </li>
-          <li></li>
+          <li>
+            <a href="https://facebook.com" rel="noopener noreferrer">
+              FB
+            </a>
+          </li>
         </ul>
       </nav>
       <p>Copyright Alchemy Challenge</p>
