@@ -76,6 +76,16 @@ export const Login = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
+      toast.warning("Logged in, directed to list", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       navigate("/list");
     }
   });
