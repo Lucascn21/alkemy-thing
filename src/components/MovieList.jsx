@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { movieApiKey } from "../config";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 export const MovieList = () => {
   const [movieArray, setMovieArray] = useState([]);
 
@@ -56,19 +57,10 @@ export const MovieList = () => {
                 <div className="mt-4 flex justify-between">
                   <div>
                     <h3 className="text-sm text-gray-700">
-                      <a
-                        rel="noreferrer"
-                        target="_blank"
-                        href={`https://www.themoviedb.org/movie/${
-                          movie.id
-                        }-${movie.original_title
-                          .split(" ")
-                          .join("-")
-                          .toLowerCase()}`}
-                      >
+                      <Link to={`/movie?movieID=${movie.id}`}>
                         <span aria-hidden="true" className="absolute inset-0" />
                         {movie.original_title}
-                      </a>
+                      </Link>
                     </h3>
                     <p className="mt-1 text-sm text-gray-500">
                       {movie.release_date}
