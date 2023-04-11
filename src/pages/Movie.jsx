@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { movieApiKey } from "../config";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
@@ -33,7 +32,7 @@ export const Movie = () => {
   const [isDataReady, setIsDataReady] = useState(false);
   useEffect(() => {
     const endPoint = `
-    https://api.themoviedb.org/3/movie/${movieID}?api_key=${movieApiKey}&language=en-US`;
+    https://api.themoviedb.org/3/movie/${movieID}?api_key=${process.env.REACT_APP_MOVIE_API_KEY}&language=en-US`;
     axios
       .get(endPoint)
       .then((response) => {
@@ -65,13 +64,14 @@ export const Movie = () => {
     >
       <section className="bg-gradient-to-r from-indigo-500 ">
         <img
+          alt="Poster"
           src={`https://image.tmdb.org/t/p/original${movieData.poster_path}`}
         ></img>
         <div className="bg-white">
           <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
             <div>
               <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-               {movieData.overview}
+                {movieData.overview}
               </h2>
               <p className="mt-4 text-gray-500">
                 The walnut wood card tray is precision milled to perfectly fit a

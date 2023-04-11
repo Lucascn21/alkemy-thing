@@ -1,13 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { movieApiKey } from "../config";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 export const MovieList = () => {
   const [movieArray, setMovieArray] = useState([]);
 
   useEffect(() => {
-    const endPoint = `https://api.themoviedb.org/3/movie/popular?api_key=${movieApiKey}`;
+    console.dir(process.env.REACT_APP_MOVIE_API_KEY);
+    const endPoint = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_MOVIE_API_KEY}`;
     axios
       .get(endPoint)
       .then((response) => {
