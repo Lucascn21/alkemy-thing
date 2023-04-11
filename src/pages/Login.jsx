@@ -64,7 +64,7 @@ export const Login = () => {
         progress: undefined,
         theme: "dark",
       });
-      const receivedToken = { maru: "maru" };
+      const receivedToken = { maru: "vercelplease" };
       localStorage.setItem("token", receivedToken);
       navigate("/list");
       return;
