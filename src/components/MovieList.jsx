@@ -29,7 +29,7 @@ export const MovieList = () => {
   return movieArray.length === 0 ? (
     <h2>No results.</h2>
   ) : (
-    <div className="bg-white py-24 sm:py-32">
+    <div className="bg-white py-24 sm:py-32 ">
       <div className=" bg-slate-200  mx-auto max-w-7xl px-6 lg:px-8">
         <div className=" mx-auto max-w-2xl lg:mx-0">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -43,7 +43,7 @@ export const MovieList = () => {
           {movieArray.map((movie) => (
             <article
               key={movie.id}
-              className="items-stretch flex max-w-xl flex-col justify-between"
+              className="items-stretch flex max-w-xl flex-col justify-between bg-[conic-gradient(at_bottom_left,_var(--tw-gradient-stops))] from-fuchsia-300 via-green-400 to-rose-700"
             >
               <div key={movie.id} className="group relative">
                 <div className="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
@@ -53,7 +53,7 @@ export const MovieList = () => {
                     className=" object-fill h-full w-full  object-center lg:h-full lg:w-full"
                   />
                 </div>
-                <div className="mt-4 flex justify-between">
+                <div className="mt-4 flex justify-evenly">
                   <div>
                     <h3 className="text-sm text-gray-700">
                       <Link to={`/movie?movieID=${movie.id}`}>
