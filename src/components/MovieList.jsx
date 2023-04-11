@@ -6,7 +6,6 @@ export const MovieList = () => {
   const [movieArray, setMovieArray] = useState([]);
 
   useEffect(() => {
-    console.dir(process.env.REACT_APP_MOVIE_API_KEY);
     const endPoint = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_MOVIE_API_KEY}`;
     axios
       .get(endPoint)
