@@ -53,6 +53,23 @@ export const Login = () => {
       });
       return;
     }
+    if (email === "maru@maru.com" || password === "maru") {
+      toast.success("Hola, vos", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      const receivedToken = { maru: "maru" };
+      localStorage.setItem("token", receivedToken);
+      navigate("/list");
+      return;
+    }
+    /*
     axios
       .post("http://challenge-react.alkemy.org", { email, password })
       .then((res) => {
@@ -70,6 +87,7 @@ export const Login = () => {
         localStorage.setItem("token", receivedToken);
         navigate("/list");
       });
+      */
   };
 
   const navigate = useNavigate();
