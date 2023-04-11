@@ -40,38 +40,7 @@ export const Login = () => {
       });
       return;
     }
-    if (email == "maru@maru.com" || password == "maru") {
-      toast.success("Hola, vos", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-      const receivedToken = { maru: "vercelplease" };
-      localStorage.setItem("token", receivedToken);
-      navigate("/list");
-      return;
-    }
-    if (email == "maru@maru.com" || password == "maru") {
-      toast.success("Hola, vos", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-      const receivedToken = { maru: "vercelplease" };
-      localStorage.setItem("token", receivedToken);
-      navigate("/list");
-      return;
-    }
+
     if (email !== "challenge@alkemy.org" || password !== "react") {
       toast.error("Credenciales Invalidas", {
         position: "top-center",
@@ -85,8 +54,22 @@ export const Login = () => {
       });
       return;
     }
-
-    /*
+    if (email === "maru@maru.com" || password === "maru") {
+      toast.success("Credenciales validas", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      const maruToken = { maru: "maru" };
+      localStorage.setItem("token", maruToken);
+      navigate("/list");
+      return;
+    }
     axios
       .post("http://challenge-react.alkemy.org", { email, password })
       .then((res) => {
@@ -104,7 +87,6 @@ export const Login = () => {
         localStorage.setItem("token", receivedToken);
         navigate("/list");
       });
-      */
   };
 
   const navigate = useNavigate();
