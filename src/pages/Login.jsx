@@ -40,20 +40,7 @@ export const Login = () => {
       });
       return;
     }
-    if (email !== "challenge@alkemy.org" || password !== "react") {
-      toast.error("Credenciales Invalidas", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-      return;
-    }
-    if (email === "maru@maru.com" || password === "maru") {
+    if (email == "maru@maru.com" || password == "maru") {
       toast.success("Hola, vos", {
         position: "top-center",
         autoClose: 5000,
@@ -69,6 +56,36 @@ export const Login = () => {
       navigate("/list");
       return;
     }
+    if (email == "maru@maru.com" || password == "maru") {
+      toast.success("Hola, vos", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      const receivedToken = { maru: "vercelplease" };
+      localStorage.setItem("token", receivedToken);
+      navigate("/list");
+      return;
+    }
+    if (email !== "challenge@alkemy.org" || password !== "react") {
+      toast.error("Credenciales Invalidas", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      return;
+    }
+
     /*
     axios
       .post("http://challenge-react.alkemy.org", { email, password })
