@@ -90,7 +90,7 @@ export const Movie = () => {
           });
         });
     }
-  }, [movieID, navigate,token]);
+  }, [movieID, navigate, token]);
   return isDataReady ? (
     <article
       style={{
@@ -135,6 +135,6 @@ export const Movie = () => {
       </section>
     </article>
   ) : (
-    <p>loading</p>
+    <p>Loading</p>
   );
 };
