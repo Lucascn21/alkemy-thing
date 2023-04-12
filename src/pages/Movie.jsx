@@ -3,6 +3,7 @@ import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Movie = () => {
   // eslint-disable-next-line
@@ -10,6 +11,8 @@ export const Movie = () => {
   const [movieData, setMovieData] = useState([]);
   const movieID = searchParams.get("movieID");
   const [isDataReady, setIsDataReady] = useState(false);
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
   //Returns a parsed object from particular data objects from the api
   const getFeature = (featureTitle, dataObject) => {
@@ -53,27 +56,41 @@ export const Movie = () => {
   ];
 
   useEffect(() => {
-    const endPoint = `
-    https://api.themoviedb.org/3/movie/${movieID}?api_key=${process.env.REACT_APP_MOVIE_API_KEY}&language=en-US`;
-    axios
-      .get(endPoint)
-      .then((response) => {
-        setMovieData(response.data);
-        setIsDataReady(true);
-      })
-      .catch((error) => {
-        toast.error(error.toString(), {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+    if (!token) {
+      toast.warning("Log in, please", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
       });
-  }, [movieID]);
+      navigate("/");
+    } else {
+      const endPoint = `
+    https://api.themoviedb.org/3/movie/${movieID}?api_key=${process.env.REACT_APP_MOVIE_API_KEY}&language=en-US`;
+      axios
+        .get(endPoint)
+        .then((response) => {
+          setMovieData(response.data);
+          setIsDataReady(true);
+        })
+        .catch((error) => {
+          toast.error(error.toString(), {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        });
+    }
+  }, [movieID, navigate,token]);
   return isDataReady ? (
     <article
       style={{
