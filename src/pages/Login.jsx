@@ -66,7 +66,7 @@ export const Login = () => {
         theme: "dark",
       });
       const maruToken = { maru: "maru" };
-      localStorage.setItem("token", maruToken);
+      sessionStorage.setItem("token", maruToken);
       navigate("/list");
       return;
     }
@@ -84,14 +84,14 @@ export const Login = () => {
           theme: "dark",
         });
         const receivedToken = res.data.token;
-        localStorage.setItem("token", receivedToken);
+        sessionStorage.setItem("token", receivedToken);
         navigate("/list");
       });
   };
 
   const navigate = useNavigate();
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     if (token) {
       toast.warning("Logged in, directed to list", {
         position: "top-center",

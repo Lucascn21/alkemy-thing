@@ -12,7 +12,7 @@ export const Movie = () => {
   const movieID = searchParams.get("movieID");
   const [isDataReady, setIsDataReady] = useState(false);
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   //Returns a parsed object from particular data objects from the api
   const getFeature = (featureTitle, dataObject) => {

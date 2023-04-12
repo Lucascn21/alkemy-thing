@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { MovieList } from "../components/MovieList";
 export const List = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   useEffect(() => {
     if (!token) {
       toast.warning("Log in, please", {
