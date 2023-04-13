@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { MovieList } from "../components/MovieList";
+import { SearchBar } from "../components/SearchBar";
 export const List = () => {
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
@@ -23,6 +24,7 @@ export const List = () => {
   });
   return (
     <main>
+      {token != null && <SearchBar />}
       <MovieList />
     </main>
   );
