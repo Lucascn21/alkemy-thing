@@ -77,10 +77,14 @@ export const Results = () => {
           {searchResults.length ? (
             searchResults.map((movie) => (
               <article key={movie.id} className=" m-4">
-                <Link to="http://localhost:3000/movie?movieID=677179">
+                <Link to={`http://localhost:3000/movie?movieID=${movie.id}`}>
                   <img
-                    className=""
-                    src="https://image.tmdb.org/t/p/original/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg"
+                    className="h-full"
+                    src={
+                      movie.poster_path
+                        ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
+                        : "/assets/img/noimage.jpg"
+                    }
                     alt="movieimg"
                   />
                 </Link>
