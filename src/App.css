@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  background-color: salmon;
+  background-color: darkgrey;
 }
 
 #root {
@@ -44,4 +44,22 @@ footer {
 .scrollbar-hide {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+.favourite-btn {
+  z-index: 9;
+  width: 2.2rem;
+  height: 2.2rem;
+  background-color: black;
+  border-radius: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+
+.favourite-btn:hover {
+  background-color: red;
 }

@@ -29,8 +29,8 @@ export const MovieList = () => {
   return movieArray.length === 0 ? (
     <h2>No results.</h2>
   ) : (
-    <div className="bg-white py-24 sm:py-32 ">
-      <div className=" bg-slate-200  mx-auto max-w-7xl px-6 lg:px-8">
+    <div className="bg-gray-700 py-24 sm:py-32 ">
+      <div className=" bg-slate-300  mx-auto max-w-7xl px-6 lg:px-8">
         <div className=" mx-auto max-w-2xl lg:mx-0">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Popular Movies
@@ -46,6 +46,7 @@ export const MovieList = () => {
               className="items-stretch flex max-w-xl flex-col justify-between bg-[conic-gradient(at_bottom_left,_var(--tw-gradient-stops))] from-fuchsia-300 via-green-400 to-rose-700"
             >
               <div key={movie.id} className="group relative">
+                <button className="favourite-btn">❤️</button>
                 <div className="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                   <img
                     src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
