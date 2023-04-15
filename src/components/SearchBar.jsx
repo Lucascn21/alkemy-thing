@@ -22,7 +22,7 @@ export const SearchBar = () => {
         }
       );
     } else {
-      navigate(`/results?movie=${keyword}`);
+      navigate(`/results?movie=${keyword}&page=1`);
     }
   };
   return (
