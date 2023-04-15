@@ -45,7 +45,7 @@ export const Pagination = (data) => {
             aria-label="Pagination"
           >
             <Link
-              to={`http://localhost:3000/results?movie=sada&page=${
+              to={`/results?movie=${movieName}&page=${
                 data.data?.page == 1 ? 1 : data.data?.page - 1
               }`}
               className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
@@ -59,9 +59,7 @@ export const Pagination = (data) => {
                 i < 3 && (
                   <Link
                     key={i}
-                    to={`http://localhost:3000/results?movie=${movieName}&page=${
-                      i + 1
-                    }`}
+                    to={`/results?movie=${movieName}&page=${i + 1}`}
                     aria-current="page"
                     className={
                       data.data.page === i + 1
@@ -85,9 +83,7 @@ export const Pagination = (data) => {
                 data.data.total_pages > 6 && (
                   <Link
                     key={i}
-                    to={`http://localhost:3000/results?movie=${movieName}&page=${
-                      i + 1
-                    }`}
+                    to={`/results?movie=${movieName}&page=${i + 1}`}
                     aria-current="page"
                     className={
                       data.data.page === i + 1
@@ -101,7 +97,7 @@ export const Pagination = (data) => {
             )}
 
             <Link
-              to={`http://localhost:3000/results?movie=${movieName}&page=${
+              to={`/results?movie=${movieName}&page=${
                 data.data.page < data.data.total_pages
                   ? data.data.page + 1
                   : data.data.page
