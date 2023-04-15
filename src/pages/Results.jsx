@@ -4,15 +4,18 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { SearchBar } from "../components/SearchBar";
 import axios from "axios";
+import { Pagination } from "../components/Pagination";
 
 export const Results = () => {
   //https://api.themoviedb.org/3/search/movie?api_key=47a7428f4d491180fc7b2642887b2dca&query=spider
   const token = sessionStorage.getItem("token");
   const navigate = useNavigate();
-  const [searchResults, setSearchResults] = useState([]);
+  const [responseResults, setResponseResults] = useState([]);
   // eslint-disable-next-line
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get("movie");
+  const pageQuery = searchParams.get("page");
+
   useEffect(() => {
     if (!token) {
       toast.warning("Log in, please", {
@@ -43,11 +46,11 @@ export const Results = () => {
       navigate("/");
     } else {
       const endPoint = `
-        https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_MOVIE_API_KEY}&query=${searchQuery}`;
+        https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_MOVIE_API_KEY}&query=${searchQuery}&page=${pageQuery}`;
       axios
         .get(endPoint)
         .then((response) => {
-          setSearchResults(response.data.results);
+          setResponseResults(response.data);
         })
         .catch((error) => {
           toast.error(error.toString(), {
@@ -62,7 +65,7 @@ export const Results = () => {
           });
         });
     }
-  });
+  }, [navigate, pageQuery, token, searchQuery]);
 
   return (
     <>
@@ -71,11 +74,11 @@ export const Results = () => {
         <section className="justify-self-center">
           <h2>Results Section</h2>
           <p>You are looking for: {searchQuery}</p>
-          {searchResults.length}
+          {responseResults.total_results}
         </section>
         <section className="scroll-smooth snap-y touch-pan-y overflow-x-auto scrollbar-hide grid md:grid-cols-1 lg:grid-cols-3 ">
-          {searchResults.length ? (
-            searchResults.map((movie) => (
+          {responseResults.total_results ? (
+            responseResults.results.map((movie) => (
               <article key={movie.id} className=" m-4">
                 <Link to={`http://localhost:3000/movie?movieID=${movie.id}`}>
                   <img
@@ -96,6 +99,7 @@ export const Results = () => {
             </article>
           )}
         </section>
+        <Pagination data={responseResults} />
       </main>
     </>
   );
