@@ -2,40 +2,44 @@ import React, { useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { Link, useSearchParams } from "react-router-dom";
 export const Pagination = (data) => {
-  console.dir(data.data.total_pages);
+  // eslint-disable-next-line
   const [searchParams, setSearchParams] = useSearchParams();
-  const movieName = searchParams.get("movie");
+  // eslint-disable-next-line
   const [currentPage, setCurrentPage] = useState(data.data?.page || 1);
-
-  console.dir(currentPage);
-  let currentPageClassName =
+  const movieName = searchParams.get("movie");
+  const currentPageClassName =
     "relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600";
-  let pageClassName =
+  const pageClassName =
     "relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0";
-  console.dir([...Array(data.data.total_pages)]);
   return currentPage ? (
     <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
       <div className="flex flex-1 justify-between sm:hidden">
-        <a
-          href="#"
-          className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+        <Link
+          to={`/results?movie=${movieName}&page=${
+            currentPage === 1 ? 1 : currentPage - 1
+          }`}
+          className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
         >
-          Previous
-        </a>
-        <a
-          href="#"
-          className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          <span className="sr-only">Previous</span>
+          <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
+        </Link>
+        <Link
+          to={`/results?movie=${movieName}&page=${
+            currentPage < data.data?.total_pages ? currentPage + 1 : currentPage
+          }`}
+          className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
         >
-          Next
-        </a>
+          <span className="sr-only">Next</span>
+          <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+        </Link>
       </div>
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-700">
             Showing
-            <span className="font-medium">{data.data.page * 20 - 19}</span> to
+            <span className="font-medium">{currentPage * 20 - 19}</span> to 
             <span className="font-medium">{data.data.results?.length}</span> of
-            <span className="font-medium">{data.data.total_results}</span>
+            <span className="font-medium">{data.data?.total_results}</span>
             results
           </p>
         </div>
@@ -46,7 +50,7 @@ export const Pagination = (data) => {
           >
             <Link
               to={`/results?movie=${movieName}&page=${
-                data.data?.page == 1 ? 1 : data.data?.page - 1
+                currentPage === 1 ? 1 : currentPage - 1
               }`}
               className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
             >
@@ -54,7 +58,7 @@ export const Pagination = (data) => {
               <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
             </Link>
 
-            {[...Array(data.data.total_pages)].map(
+            {[...Array(data.data?.total_pages)].map(
               (x, i) =>
                 i < 3 && (
                   <Link
@@ -62,7 +66,7 @@ export const Pagination = (data) => {
                     to={`/results?movie=${movieName}&page=${i + 1}`}
                     aria-current="page"
                     className={
-                      data.data.page === i + 1
+                      currentPage === i + 1
                         ? currentPageClassName
                         : pageClassName
                     }
@@ -71,7 +75,7 @@ export const Pagination = (data) => {
                   </Link>
                 )
             )}
-            {data.data.total_pages > 6 && (
+            {data.data?.total_pages > 6 && (
               <span className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0">
                 ...
               </span>
@@ -79,8 +83,8 @@ export const Pagination = (data) => {
 
             {[...Array(data.data.total_pages)].map(
               (x, i) =>
-                i > data.data.total_pages - 4 &&
-                data.data.total_pages > 6 && (
+                i > data.data?.total_pages - 4 &&
+                data.data?.total_pages > 6 && (
                   <Link
                     key={i}
                     to={`/results?movie=${movieName}&page=${i + 1}`}
@@ -98,9 +102,9 @@ export const Pagination = (data) => {
 
             <Link
               to={`/results?movie=${movieName}&page=${
-                data.data.page < data.data.total_pages
-                  ? data.data.page + 1
-                  : data.data.page
+                currentPage < data.data?.total_pages
+                  ? currentPage + 1
+                  : currentPage
               }`}
               className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
             >
