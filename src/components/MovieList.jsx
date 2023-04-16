@@ -1,34 +1,7 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import React from "react";
 import { Link } from "react-router-dom";
-export const MovieList = () => {
-  const [movieArray, setMovieArray] = useState([]);
-
-  useEffect(() => {
-    const endPoint = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_MOVIE_API_KEY}`;
-    axios
-      .get(endPoint)
-      .then((response) => {
-        setMovieArray(response.data.results);
-      })
-      .catch((error) => {
-        toast.error(error.toString(), {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
-      });
-  }, []);
-
-  return movieArray.length === 0 ? (
-    <h2>No results.</h2>
-  ) : (
+export const MovieList = ({movieArray, addOrRemoveFav}) => {
+  return (
     <div className="bg-gray-700 py-24 sm:py-32 ">
       <div className=" bg-slate-300  mx-auto max-w-7xl px-6 lg:px-8">
         <div className=" mx-auto max-w-2xl lg:mx-0">
@@ -46,7 +19,12 @@ export const MovieList = () => {
               className="items-stretch flex max-w-xl flex-col justify-between bg-[conic-gradient(at_bottom_left,_var(--tw-gradient-stops))] from-fuchsia-300 via-green-400 to-rose-700"
             >
               <div key={movie.id} className="group relative">
-                <button className="favourite-btn">❤️</button>
+                <button
+                  onClick={() => addOrRemoveFav(`${movie.id}`)}
+                  className="favourite-btn"
+                >
+                  ❤️
+                </button>
                 <div className="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                   <img
                     src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
