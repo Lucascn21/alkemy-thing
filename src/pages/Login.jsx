@@ -53,7 +53,7 @@ export const Login = () => {
       });
       const maruToken = { maru: "maru" };
       sessionStorage.setItem("token", maruToken);
-      navigate("/list");
+      navigate("/popular");
       return;
     }
     if (email !== "challenge@alkemy.org" || password !== "react") {
@@ -85,7 +85,7 @@ export const Login = () => {
         });
         const receivedToken = res.data.token;
         sessionStorage.setItem("token", receivedToken);
-        navigate("/list");
+        navigate("/popular");
       });
   };
 
@@ -93,7 +93,7 @@ export const Login = () => {
   useEffect(() => {
     const token = sessionStorage.getItem("token");
     if (token) {
-      toast.warning("Logged in, directed to list", {
+      toast.warning("Logged in, directed to popular movies list", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -103,7 +103,7 @@ export const Login = () => {
         progress: undefined,
         theme: "dark",
       });
-      navigate("/list");
+      navigate("/popular");
     }
   });
   return (

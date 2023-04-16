@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { MovieList } from "../components/MovieList";
+import { Popular } from "./Popular";
 import { SearchBar } from "../components/SearchBar";
-export const List = () => {
+export const List = ({ favFunction }) => {
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
   useEffect(() => {
@@ -25,7 +25,7 @@ export const List = () => {
   return (
     <main>
       {token != null && <SearchBar />}
-      <MovieList />
+      <Popular addOrRemoveFav={favFunction} />
     </main>
   );
 };
