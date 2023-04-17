@@ -15,6 +15,9 @@ export const NavBar = () => {
             <Link to="/popular">Popular</Link>
           </li>
           <li>
+            <Link to="/favorites">Favorites</Link>
+          </li>
+          <li>
             <Link to="/contact">Contact</Link>
           </li>
 

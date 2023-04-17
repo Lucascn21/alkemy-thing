@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-export const MovieList = ({ movieArray, addOrRemoveFav }) => {
+export const MovieList = ({ listSection, movieArray, addOrRemoveFav }) => {
   //Should probably make a movie component with is own itsFavorite state or something like that
   const localFavsString = localStorage.getItem("favMovies");
   const localFavsArray = JSON.parse(localFavsString);
@@ -10,10 +10,15 @@ export const MovieList = ({ movieArray, addOrRemoveFav }) => {
       <div className=" bg-slate-300  mx-auto max-w-7xl px-6 lg:px-8">
         <div className=" mx-auto max-w-2xl lg:mx-0">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Popular Movies
+            {listSection} Movies
           </h2>
           <p className="mt-2 text-lg leading-8 text-gray-600">
-            This is a small list of popular movies according to themoviedb.org
+            This is a small list of{" "}
+            {`${
+              listSection === "Favorites"
+                ? `your ${listSection.toLowerCase()}`
+                : `${listSection} movies`
+            }`}
           </p>
         </div>
         <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">

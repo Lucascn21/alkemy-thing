@@ -2,10 +2,11 @@ import { Footer } from "./components/Footer";
 import { NavBar } from "./components/NavBar";
 
 import { Login } from "./pages/Login";
-import { List } from "./pages/List";
+import { Popular } from "./pages/Popular";
 import { Contact } from "./pages/Contact";
 import { Movie } from "./pages/Movie";
 import { Results } from "./pages/Results";
+import { Favorites } from "./pages/Favorites";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -42,10 +43,16 @@ export default function App() {
           <Route path="/" element={<Login />} />
           <Route
             path="/popular"
-            element={<List favFunction={addOrRemoveFav} isFav={isFavorite} />}
+            element={
+              <Popular addOrRemoveFav={addOrRemoveFav} isFav={isFavorite} />
+            }
           />
           <Route path="/contact" element={<Contact />} />
           <Route path="/movie" element={<Movie />} />
+          <Route
+            path="/favorites"
+            element={<Favorites addOrRemoveFav={addOrRemoveFav} />}
+          />
           <Route path="/results" element={<Results />} />
         </Routes>
         <Footer />
