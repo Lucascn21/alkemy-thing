@@ -1,20 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { MovieList } from "../components/MovieList";
 
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-export const Favorites = ({ addOrRemoveFav }) => {
+export const Favorites = ({ addOrRemoveFav, favorites }) => {
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
-  const [favorites, setFavorites] = useState([]);
-
   useEffect(() => {
-    const localFavsString = localStorage.getItem("favMovies");
-    const localFavsArray = JSON.parse(localFavsString);
-    const localFavsObj = localFavsArray?.map((fav) => {
-      return JSON.parse(fav);
-    });
     if (!token) {
       toast.warning("Log in, please", {
         position: "top-center",
@@ -28,7 +21,7 @@ export const Favorites = ({ addOrRemoveFav }) => {
       });
       navigate("/");
     }
-    if (!localFavsArray) {
+    if (!favorites?.length) {
       toast.warning("No favorites, go ❤️ some movies", {
         position: "top-center",
         autoClose: 5000,
@@ -41,9 +34,7 @@ export const Favorites = ({ addOrRemoveFav }) => {
       });
       navigate("/popular");
     }
-    setFavorites(localFavsObj);
-  }, [navigate, token, favorites]);
-
+  });
   return (
     <MovieList
       listSection="Favorites"

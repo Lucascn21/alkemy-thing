@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 import { Footer } from "./components/Footer";
 import { NavBar } from "./components/NavBar";
 
@@ -17,6 +19,17 @@ import "./App.css";
 export default function App() {
   const localFavs = localStorage.getItem("favMovies");
   const favMoviesSet = new Set(JSON.parse(localFavs));
+  const [favorites, setFavorites] = useState([]);
+  useEffect(() => {
+    const localFavsArray = JSON.parse(localStorage.getItem("favMovies"));
+    if (localFavsArray) {
+      const localFavsObj = localFavsArray?.map((fav) => {
+        return JSON.parse(fav);
+      });
+      setFavorites(localFavsObj);
+    }
+  }, []);
+
   const addOrRemoveFav = (e, movie) => {
     const { poster_path, id, original_title } = movie;
     const movieData = { poster_path, id, original_title };
@@ -28,6 +41,12 @@ export default function App() {
     favMoviesSet.size
       ? localStorage.setItem("favMovies", favMoviesStringifiedArray)
       : localStorage.clear();
+
+    const localFavsArray = JSON.parse(localStorage.getItem("favMovies"));
+    const localFavsObj = localFavsArray?.map((fav) => {
+      return JSON.parse(fav);
+    });
+    setFavorites(localFavsObj);
     e.currentTarget.textContent = isFavorite(movieData);
   };
 
@@ -52,7 +71,13 @@ export default function App() {
           />
           <Route
             path="/favorites"
-            element={<Favorites addOrRemoveFav={addOrRemoveFav} />}
+            element={
+              <Favorites
+                setFavorites={setFavorites}
+                favorites={favorites}
+                addOrRemoveFav={addOrRemoveFav}
+              />
+            }
           />
           <Route path="/results" element={<Results />} />
         </Routes>
