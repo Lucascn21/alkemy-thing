@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import { MovieList } from "../components/MovieList";
-export const Popular = ({ addOrRemoveFav }) => {
+export const Popular = ({ addOrRemoveFav, isFav }) => {
   const [movieArray, setMovieArray] = useState([]);
 
   useEffect(() => {
@@ -30,6 +30,10 @@ export const Popular = ({ addOrRemoveFav }) => {
   return movieArray.length === 0 ? (
     <h2>No results.</h2>
   ) : (
-    <MovieList addOrRemoveFav={addOrRemoveFav} movieArray={movieArray} />
+    <MovieList
+      isFav={isFav}
+      addOrRemoveFav={addOrRemoveFav}
+      movieArray={movieArray}
+    />
   );
 };

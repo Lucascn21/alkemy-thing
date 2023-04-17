@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-export const MovieList = ({movieArray, addOrRemoveFav}) => {
+export const MovieList = ({ movieArray, addOrRemoveFav, isFav }) => {
+  const localFavsString = localStorage.getItem("favMovies");
+  const localFavsArray = localFavsString?.split(",");
+
   return (
     <div className="bg-gray-700 py-24 sm:py-32 ">
       <div className=" bg-slate-300  mx-auto max-w-7xl px-6 lg:px-8">
@@ -20,10 +23,10 @@ export const MovieList = ({movieArray, addOrRemoveFav}) => {
             >
               <div key={movie.id} className="group relative">
                 <button
-                  onClick={() => addOrRemoveFav(`${movie.id}`)}
+                  onClick={(e) => addOrRemoveFav(e, movie.id)}
                   className="favourite-btn"
                 >
-                  ❤️
+                  {localFavsArray?.includes(movie.id.toString()) ? "🤍" : "❤️"}
                 </button>
                 <div className="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                   <img

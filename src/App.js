@@ -14,18 +14,22 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 export default function App() {
-  console.dir(localStorage.getItem("favMovies"));
-  const favMovies = localStorage.getItem("favMovies") || new Set();
+  const localFavs = localStorage.getItem("favMovies");
+  const favMovies = new Set();
 
-  let tempFavMovies = favMovies;
-  const addOrRemoveFav = (movieId) => {
-    if (!favMovies.has(movieId)) {
-      tempFavMovies.add(movieId);
-    } else if (favMovies.has(movieId)) {
-      tempFavMovies.delete(movieId);
-    }
+  localFavs !== null && favMovies.add(localFavs);
 
-    localStorage.setItem("favMovies", ...tempFavMovies.entries());
+  const addOrRemoveFav = (e, movieId) => {
+    favMovies.has(movieId) ? favMovies.delete(movieId) : favMovies.add(movieId);
+    const favMoviesString = Array.from(favMovies).toString();
+    favMovies.size
+      ? localStorage.setItem("favMovies", favMoviesString)
+      : localStorage.clear();
+    e.currentTarget.textContent = isFavorite(movieId);
+  };
+
+  const isFavorite = (movieId) => {
+    return favMovies.has(movieId) ? "🤍" : "❤️";
   };
   return (
     <>
@@ -35,7 +39,7 @@ export default function App() {
           <Route path="/" element={<Login />} />
           <Route
             path="/popular"
-            element={<List favFunction={addOrRemoveFav} />}
+            element={<List favFunction={addOrRemoveFav} isFav={isFavorite} />}
           />
           <Route path="/contact" element={<Contact />} />
           <Route path="/movie" element={<Movie />} />
