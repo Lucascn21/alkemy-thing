@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export const MovieList = ({ movieArray, addOrRemoveFav }) => {
   //Should probably make a movie component with is own itsFavorite state or something like that
   const localFavsString = localStorage.getItem("favMovies");
-  const localFavsArray = localFavsString?.split(",");
+  const localFavsArray = JSON.parse(localFavsString);
   const localFavsSet = new Set(localFavsArray);
   return (
     <div className="bg-gray-700 py-24 sm:py-32 ">
@@ -24,10 +24,18 @@ export const MovieList = ({ movieArray, addOrRemoveFav }) => {
             >
               <div key={movie.id} className="group relative">
                 <button
-                  onClick={(e) => addOrRemoveFav(e, movie.id)}
+                  onClick={(e) => addOrRemoveFav(e, movie)}
                   className="favourite-btn"
                 >
-                  {localFavsSet.has(movie.id.toString()) ? "🤍" : "❤️"}
+                  {localFavsSet.has(
+                    JSON.stringify({
+                      poster_path: movie.poster_path,
+                      id: movie.id,
+                      original_title: movie.original_title,
+                    })
+                  )
+                    ? "🤍"
+                    : "❤️"}
                 </button>
                 <div className="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                   <img

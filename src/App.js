@@ -14,24 +14,25 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 export default function App() {
-  const localFavs = localStorage.getItem("favMovies")?.split(",");
-  const favMovies = new Set();
-  //Make a function maybe
-  for (const fav of localFavs) {
-    localFavs !== undefined && favMovies.add(Number(fav));
-  }
-
-  const addOrRemoveFav = (e, movieId) => {
-    favMovies.has(movieId) ? favMovies.delete(movieId) : favMovies.add(movieId);
-    const favMoviesString = Array.from(favMovies).toString();
-    favMovies.size
-      ? localStorage.setItem("favMovies", favMoviesString)
+  const localFavs = localStorage.getItem("favMovies");
+  const favMoviesSet = new Set(JSON.parse(localFavs));
+  const addOrRemoveFav = (e, movie) => {
+    const { poster_path, id, original_title } = movie;
+    const movieData = { poster_path, id, original_title };
+    const movieDataString = JSON.stringify(movieData);
+    favMoviesSet.has(movieDataString)
+      ? favMoviesSet.delete(movieDataString)
+      : favMoviesSet.add(movieDataString);
+    const favMoviesStringifiedArray = JSON.stringify(Array.from(favMoviesSet));
+    favMoviesSet.size
+      ? localStorage.setItem("favMovies", favMoviesStringifiedArray)
       : localStorage.clear();
-    e.currentTarget.textContent = isFavorite(movieId);
+    e.currentTarget.textContent = isFavorite(movieData);
   };
 
-  const isFavorite = (movieId) => {
-    return favMovies.has(movieId) ? "🤍" : "❤️";
+  const isFavorite = (movie) => {
+    const movieDataString = JSON.stringify(movie);
+    return favMoviesSet.has(movieDataString) ? "🤍" : "❤️";
   };
   return (
     <>
