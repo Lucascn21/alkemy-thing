@@ -132,20 +132,22 @@ export const Movie = ({ addOrRemoveFav }) => {
                       </dd>
                     </div>
                   ))}
-                  <button
-                    onClick={(e) => addOrRemoveFav(e, movieData)}
-                    className="favourite-btn-2"
-                  >
-                    {localFavsSet.has(
-                      JSON.stringify({
-                        poster_path: movieData.poster_path,
-                        id: movieData.id,
-                        original_title: movieData.original_title,
-                      })
-                    )
-                      ? "🤍"
-                      : "❤️"}
-                  </button>
+                  <div className="favourite-btn-area border-t border-gray-200 pt-4">
+                    <button
+                      onClick={(e) => addOrRemoveFav(e, movieData)}
+                      className="favourite-btn-2"
+                    >
+                      {localFavsSet.has(
+                        JSON.stringify({
+                          poster_path: movieData.poster_path,
+                          id: movieData.id,
+                          original_title: movieData.original_title,
+                        })
+                      )
+                        ? "🤍"
+                        : "❤️"}
+                    </button>
+                  </div>
                 </dl>
               </div>
             </div>
