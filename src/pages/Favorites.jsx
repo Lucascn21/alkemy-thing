@@ -42,7 +42,7 @@ export const Favorites = ({ addOrRemoveFav }) => {
       navigate("/popular");
     }
     setFavorites(localFavsObj);
-  });
+  }, [navigate, token, favorites]);
 
   return (
     <MovieList

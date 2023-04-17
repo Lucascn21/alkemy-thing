@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { SearchBar } from "../components/SearchBar";
 
-export const Movie = () => {
+export const Movie = ({ addOrRemoveFav }) => {
   // eslint-disable-next-line
   const [searchParams, setSearchParams] = useSearchParams();
   const [movieData, setMovieData] = useState([]);
@@ -15,6 +15,9 @@ export const Movie = () => {
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
 
+  const localFavsString = localStorage.getItem("favMovies");
+  const localFavsArray = JSON.parse(localFavsString);
+  const localFavsSet = new Set(localFavsArray);
   //Returns a parsed object from particular data objects from the api
   const getFeature = (featureTitle, dataObject) => {
     let dataArray = [];
@@ -108,6 +111,7 @@ export const Movie = () => {
                 }
                 alt="movieimg"
               />
+
               <div className="bg-[conic-gradient(at_right,_var(--tw-gradient-stops))] from-gray-100 to-gray-300 h-full">
                 <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                   {movieData.original_title}
@@ -128,6 +132,20 @@ export const Movie = () => {
                       </dd>
                     </div>
                   ))}
+                  <button
+                    onClick={(e) => addOrRemoveFav(e, movieData)}
+                    className="favourite-btn-2"
+                  >
+                    {localFavsSet.has(
+                      JSON.stringify({
+                        poster_path: movieData.poster_path,
+                        id: movieData.id,
+                        original_title: movieData.original_title,
+                      })
+                    )
+                      ? "🤍"
+                      : "❤️"}
+                  </button>
                 </dl>
               </div>
             </div>

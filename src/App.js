@@ -43,12 +43,13 @@ export default function App() {
           <Route path="/" element={<Login />} />
           <Route
             path="/popular"
-            element={
-              <Popular addOrRemoveFav={addOrRemoveFav} isFav={isFavorite} />
-            }
+            element={<Popular addOrRemoveFav={addOrRemoveFav} />}
           />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/movie" element={<Movie />} />
+          <Route
+            path="/movie"
+            element={<Movie addOrRemoveFav={addOrRemoveFav} />}
+          />
           <Route
             path="/favorites"
             element={<Favorites addOrRemoveFav={addOrRemoveFav} />}
