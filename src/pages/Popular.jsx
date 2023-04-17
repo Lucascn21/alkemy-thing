@@ -39,7 +39,7 @@ export const Popular = ({ addOrRemoveFav }) => {
           theme: "dark",
         });
       });
-  }, []);
+  });
 
   return movieArray.length === 0 ? (
     <h2>No results.</h2>
