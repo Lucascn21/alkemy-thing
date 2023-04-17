@@ -25,7 +25,7 @@ export const List = ({ favFunction, isFav }) => {
   return (
     <main>
       {token != null && <SearchBar />}
-      <Popular isFav={isFav} addOrRemoveFav={favFunction} />
+      <Popular addOrRemoveFav={favFunction} />
     </main>
   );
 };

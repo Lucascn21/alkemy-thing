@@ -30,10 +30,6 @@ export const Popular = ({ addOrRemoveFav, isFav }) => {
   return movieArray.length === 0 ? (
     <h2>No results.</h2>
   ) : (
-    <MovieList
-      isFav={isFav}
-      addOrRemoveFav={addOrRemoveFav}
-      movieArray={movieArray}
-    />
+    <MovieList addOrRemoveFav={addOrRemoveFav} movieArray={movieArray} />
   );
 };

@@ -14,10 +14,12 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 export default function App() {
-  const localFavs = localStorage.getItem("favMovies");
+  const localFavs = localStorage.getItem("favMovies")?.split(",");
   const favMovies = new Set();
-
-  localFavs !== null && favMovies.add(localFavs);
+  //Make a function maybe
+  for (const fav of localFavs) {
+    localFavs !== undefined && favMovies.add(Number(fav));
+  }
 
   const addOrRemoveFav = (e, movieId) => {
     favMovies.has(movieId) ? favMovies.delete(movieId) : favMovies.add(movieId);
