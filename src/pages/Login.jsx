@@ -83,7 +83,7 @@ export const Login = () => {
     }
 
     axios
-      .post("http://challenge-react.alkemy.org", { email, password })
+      .post("https://dummyjson.com/test", { email, password })
       .then((res) => {
         toast.success("Logged In successfully", {
           position: "top-center",
