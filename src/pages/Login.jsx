@@ -83,6 +83,7 @@ export const Login = () => {
     }
 
     axios
+    //Had to replace http://challenge-react.alkemy.org for a dummyjson endpoint because of protocol and SSL issues on deploy
       .post("https://dummyjson.com/test", { email, password })
       .then((res) => {
         toast.success("Logged In successfully", {
