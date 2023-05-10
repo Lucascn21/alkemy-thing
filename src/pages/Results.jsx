@@ -7,7 +7,6 @@ import axios from "axios";
 import { Pagination } from "../components/Pagination";
 
 export const Results = () => {
-  //https://api.themoviedb.org/3/search/movie?api_key=47a7428f4d491180fc7b2642887b2dca&query=spider
   const token = sessionStorage.getItem("token");
   const navigate = useNavigate();
   const [responseResults, setResponseResults] = useState([]);

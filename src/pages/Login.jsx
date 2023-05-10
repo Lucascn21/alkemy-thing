@@ -7,7 +7,19 @@ const emailIsValid = (email) => {
   // eslint-disable-next-line
   return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
 };
-
+toast.warning(
+  "The API demands these values in order to grant the access token: Email:challenge@alkemy.org Pwd:react",
+  {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: false,
+    progress: undefined,
+    theme: "dark",
+  }
+);
 export const Login = () => {
   const submitHandler = (e) => {
     e.preventDefault();
@@ -40,7 +52,7 @@ export const Login = () => {
       });
       return;
     }
-    if (email === "maru@maru.com" || password === "maru") {
+    if (email === "test@test.com" || password === "test") {
       toast.success("Credenciales validas", {
         position: "top-center",
         autoClose: 5000,
@@ -51,8 +63,8 @@ export const Login = () => {
         progress: undefined,
         theme: "dark",
       });
-      const maruToken = { maru: "maru" };
-      sessionStorage.setItem("token", maruToken);
+      const testToken = { test: "test" };
+      sessionStorage.setItem("token", testToken);
       navigate("/popular");
       return;
     }
@@ -185,6 +197,10 @@ export const Login = () => {
                 >
                   Forgot your password?
                 </a>
+                <p>
+                  Email: Test@test.com Pwd: Test are hardcoded to log-in without
+                  request to any api.{" "}
+                </p>
               </div>
             </div>
 
