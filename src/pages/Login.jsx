@@ -150,6 +150,7 @@ export const Login = () => {
                   Email address
                 </label>
                 <input
+                  defaultValue="challenge@alkemy.org"
                   id="email-address"
                   name="email"
                   type="email"
@@ -164,6 +165,7 @@ export const Login = () => {
                   Password
                 </label>
                 <input
+                  defaultValue="react"
                   id="password"
                   name="password"
                   type="password"
