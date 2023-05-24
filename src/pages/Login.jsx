@@ -83,7 +83,7 @@ export const Login = () => {
     }
 
     axios
-    //Had to replace http://challenge-react.alkemy.org for a dummyjson endpoint because of protocol and SSL issues on deploy
+      //Had to replace http://challenge-react.alkemy.org for a dummyjson endpoint because of protocol and SSL issues on deploy
       .post("https://dummyjson.com/test", { email, password })
       .then((res) => {
         toast.success("Logged In successfully", {
@@ -133,7 +133,7 @@ export const Login = () => {
               Sign in to your account
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
-              Or
+              Or{" "}
               <a
                 href="/"
                 className="font-medium text-indigo-600 hover:text-indigo-500"
@@ -199,7 +199,7 @@ export const Login = () => {
                   Forgot your password?
                 </a>
                 <p>
-                  Email: Test@test.com Pwd: Test are hardcoded to log-in without
+                  Email: test@test.com Pwd: Test are hardcoded to log-in without
                   request to any api.{" "}
                 </p>
               </div>
